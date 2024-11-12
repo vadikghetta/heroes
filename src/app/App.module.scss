@@ -1,0 +1,76 @@
+@import "../sass/variables";
+
+.main {
+    background-color: $dark;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.title {
+    color: #FFF;
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+.logo {
+    animation: logoAnimate 6s linear infinite;
+}
+
+.count {
+    font-size: 26px;
+    color: #FFF;
+    margin-bottom: 20px;
+}
+.counter {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn {
+    background-color: $ghost;
+    cursor: pointer;
+    border-radius: 20px;
+    font-size: 23px;
+    padding: 20px 40px;
+}
+
+@keyframes logoAnimate {
+    0%  {
+        transform: rotate(0);
+    }
+    10%  {
+        transform: rotate(36deg);
+    }
+    20%  {
+        transform: rotate(72deg);
+    }
+    30%  {
+        transform: rotate(108deg);
+    }
+    40%  {
+        transform: rotate(144deg);
+    }
+    50%  {
+        transform: rotate(180deg);
+    }
+    60%  {
+        transform: rotate(216deg);
+    }
+    70%  {
+        transform: rotate(252deg);
+    }
+    80%  {
+        transform: rotate(286deg);
+    }
+    90%  {
+        transform: rotate(322deg);
+    }
+    100%  {
+        transform: rotate(360deg);
+    }
+}
