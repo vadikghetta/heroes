@@ -1,9 +1,12 @@
 import { useState } from "react";
 import styles from "./App.module.scss";
+import { API } from "@/api";
+
 
 
 const App = () => {
 	const [count, setCount] = useState(0);
+	console.log(API);
 	return (
 		<main className={styles.main}>
 			<h1 className={styles.title}>Hello Its my react starter</h1>

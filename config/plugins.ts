@@ -8,6 +8,7 @@ import CopyWebpackPlugin  from "copy-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import ReactRefreshPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 import path from "path";
+import Dotenv from "dotenv-webpack";
 
 export function createPlugins ({mode, paths : {html, publicFolder, output}, analizer} : IWebpackOptions) : Configuration["plugins"]  {
 
@@ -24,7 +25,8 @@ export function createPlugins ({mode, paths : {html, publicFolder, output}, anal
 				{ from: path.resolve(publicFolder, "assets"), to: path.resolve(output, "assets"), noErrorOnMissing : true }
 			]
 		}),
-		new ForkTsCheckerWebpackPlugin()
+		new ForkTsCheckerWebpackPlugin(),
+		new Dotenv()
         
 	];
 	if(isDev) {
