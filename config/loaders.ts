@@ -4,6 +4,7 @@ import { IWebpackOptions } from "../src/types/webpack.types";
 
 
 
+
 export function createLoaders  (options : IWebpackOptions) : ModuleOptions["rules"] {
 	const isDev = options.mode === "development" ? true : false;
 	const cssModules =   {
@@ -15,18 +16,19 @@ export function createLoaders  (options : IWebpackOptions) : ModuleOptions["rule
 			} 
 		}
 	};
-	const assetLoader =    {
+	const assetLoader = {
 		test: /\.(png|jpg|gif)$/i,
 		use: [
 			{
 				loader: "file-loader",
 				options: {
+					name: "[folder]/[name].[hash].[ext]",  // Публичный путь для доступа к файлам
 					limit: 8192,
-					esModule: false
+					esModule: false,
+					outputPath: "assets"
 				}
 			}
 		],
-
 		type: "javascript/auto"
 	};
 
