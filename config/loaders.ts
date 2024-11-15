@@ -29,12 +29,6 @@ export function createLoaders  (options : IWebpackOptions) : ModuleOptions["rule
 		type: "javascript/auto"
 	};
 
-	const resolveUrl =  { 
-		loader: "resolve-url-loader", // Обрабатывает относительные пути в стилях
-		options: {
-			sourceMap: true // Включи source maps
-		}
-	};
 	const sassLoader =  {
 		test: /\.s[ac]ss$/i,
 		use: [
@@ -44,7 +38,6 @@ export function createLoaders  (options : IWebpackOptions) : ModuleOptions["rule
 				loader: "sass-loader", 
 				options: {
 					api: "modern",
-					sourceMap: true,
 					sassOptions: {
 						outputStyle: "compressed" 
 					}
@@ -97,7 +90,7 @@ export function createLoaders  (options : IWebpackOptions) : ModuleOptions["rule
   
 	};
 	return [
-		resolveUrl,
+		// resolveUrl,
 		sassLoader,
 		svgrLoader,
 		assetLoader,
