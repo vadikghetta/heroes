@@ -1,0 +1,1 @@
+export type TElement = "fire" | "all" | "wind" | "water" | "earth";

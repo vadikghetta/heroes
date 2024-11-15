@@ -18,7 +18,7 @@ module.exports = {
         "comma-dangle": ["error", "never"],
         quotes: ["error", "double"],
         "react/prop-types": [0],
-        "indent": ["error", "tab"],
+        "indent": ["error", "tab", { "SwitchCase": 1 }],
         "no-undef": "error",
         "@typescript-eslint/no-restricted-types": "off",
         "comma-spacing": "error",
