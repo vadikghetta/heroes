@@ -28,17 +28,25 @@ export function createLoaders  (options : IWebpackOptions) : ModuleOptions["rule
 
 		type: "javascript/auto"
 	};
+
+	const resolveUrl =  { 
+		loader: "resolve-url-loader", // Обрабатывает относительные пути в стилях
+		options: {
+			sourceMap: true // Включи source maps
+		}
+	};
 	const sassLoader =  {
 		test: /\.s[ac]ss$/i,
 		use: [
 			isDev ? "style-loader" : MiniCssExtractPlugin.loader,
 			cssModules,
 			{
-				loader: "sass-loader",
+				loader: "sass-loader", 
 				options: {
-					api: "modern-compiler",
+					api: "modern",
+					sourceMap: true,
 					sassOptions: {
-						outputStyle: "compressed"
+						outputStyle: "compressed" 
 					}
 				}
 			}
@@ -89,6 +97,7 @@ export function createLoaders  (options : IWebpackOptions) : ModuleOptions["rule
   
 	};
 	return [
+		resolveUrl,
 		sassLoader,
 		svgrLoader,
 		assetLoader,
