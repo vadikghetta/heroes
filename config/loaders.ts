@@ -21,7 +21,8 @@ export function createLoaders  (options : IWebpackOptions) : ModuleOptions["rule
 			{
 				loader: "file-loader",
 				options: {
-					limit: 8192
+					limit: 8192,
+					esModule: false
 				}
 			}
 		],
