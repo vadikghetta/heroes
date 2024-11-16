@@ -1,12 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterSlice from "./slices/counterSlice";
-
+import heroes from "./slices/heroesSlice";
+import filters from "./slices/filtersSlice";
 
 
 
 export const store = configureStore({
 	reducer: {
-		counter : counterSlice
+		heroes,
+		filters
 	},
 	// eslint-disable-next-line no-undef
 	devTools : process.env.NODE_ENV !== "production" 
