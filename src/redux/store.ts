@@ -7,7 +7,9 @@ import counterSlice from "./slices/counterSlice";
 export const store = configureStore({
 	reducer: {
 		counter : counterSlice
-	}
+	},
+	// eslint-disable-next-line no-undef
+	devTools : process.env.NODE_ENV !== "production" 
 });
 
 
