@@ -1,9 +1,9 @@
-import "./global.scss";
+import "./sass/global.scss";
 import { createRoot } from "react-dom/client";
 
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
-import App from "./app/App";
+import App from "./app/app";
 
 
 const rootNode = document.getElementById("root");
