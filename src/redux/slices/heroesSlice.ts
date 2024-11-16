@@ -1,6 +1,8 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice , createAsyncThunk} from "@reduxjs/toolkit";
 import {THeroesRoot} from "../../types/heroes";
-import { TStatusType } from "@/types/general.types";
+import { ROUTES, TStatusType } from "@/types/general.types";
+// import {useHttp} from "../../hooks";
+import { API } from "@/api";
 
 interface IHeroesInitialState {
     heroes : THeroesRoot
@@ -11,24 +13,44 @@ const initialState : IHeroesInitialState = {
 	heroesLoadingStatus : "idle"
 };
 
+
+export const fetchHeroes = createAsyncThunk(
+	"heroes/fetchHeroes",
+	async () => {
+		try {
+			const request = await fetch(`${API}${ROUTES.HEROES}`);
+			if(!request.ok) return;
+			const result = await request.json();
+			return result;
+		}catch {
+			return;
+		}
+	}
+);
+
+
 const heroesSlice = createSlice({
-	name : "heroes",
+	name: "heroes",
 	initialState,
-	reducers : {
-		heroesFetching: state => {state.heroesLoadingStatus = "loading";},
-		heroesFetched: (state, action) => {
-			state.heroesLoadingStatus = "idle";
-			state.heroes = action.payload;
-		},
-		heroesFetchingError: state => {
-			state.heroesLoadingStatus = "error";
-		},
+	reducers: {
 		heroCreated: (state, action) => {
 			state.heroes.push(action.payload);
 		},
 		heroDeleted: (state, action) => {
 			state.heroes = state.heroes.filter(item => item.id !== action.payload);
 		}
+	},
+	extraReducers: (builder) => {
+		builder
+			.addCase(fetchHeroes.pending, state => {state.heroesLoadingStatus = "loading";})
+			.addCase(fetchHeroes.fulfilled, (state, action) => {
+				state.heroesLoadingStatus = "idle";
+				state.heroes = action.payload;
+			})
+			.addCase(fetchHeroes.rejected, state => {
+				state.heroesLoadingStatus = "error";
+			})
+			.addDefaultCase(() => {});
 	}
 });
 
@@ -37,9 +59,6 @@ const {actions, reducer} = heroesSlice;
 
 export default reducer;
 export const {
-	heroesFetching,
-	heroesFetched,
-	heroesFetchingError,
 	heroCreated,
 	heroDeleted
 } = actions;

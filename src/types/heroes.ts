@@ -1,3 +1,5 @@
+import { TElement } from "./general.types";
+
 export type THeroesRoot = IHeroesItem[]
 
 export interface IHeroesItem {
@@ -5,6 +7,6 @@ export interface IHeroesItem {
   name: string
   avatar: string
   description: string
-  element: string
+  element: TElement
   id: string
 }
