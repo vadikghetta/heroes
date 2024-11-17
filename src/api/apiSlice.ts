@@ -1,5 +1,5 @@
 import { API } from "@/constants";
-import { IForm, ROUTES } from "@/types/general.types";
+import { IForm, METODS_CONSTANTS, ROUTES } from "@/types/general.types";
 import {  THeroesRoot } from "@/types/heroes";
 import { createApi, fetchBaseQuery  } from "@reduxjs/toolkit/query/react";
 
@@ -16,7 +16,7 @@ export const apiSlice = createApi({
 		createHero : builder.mutation<IForm, Partial<IForm>>({
 			query :  hero => ({
 				url: ROUTES.HEROES,
-				method : "POST",
+				method : METODS_CONSTANTS.POST,
 				body : hero
 			}),
 			invalidatesTags : ["Heroes"]
@@ -24,7 +24,7 @@ export const apiSlice = createApi({
 		deleteHero : builder.mutation<IForm, string>({
 			query : id => ({
 				url : `${ROUTES.HEROES}/${id}`,
-				method : "DELETE"
+				method : METODS_CONSTANTS.DELETE
 			}),
 			invalidatesTags : ["Heroes"]
 		})
