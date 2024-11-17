@@ -1,14 +1,35 @@
-import { FormEvent, useState } from "react";
+import { useCreateHeroMutation } from "@/api/apiSlice";
+import { useAppSelector } from "@/redux/hooks";
+import { IForm } from "@/types/general.types";
+import { ChangeEvent, FormEvent, useState } from "react";
+
 
 const HeroesAddForm = () => {
+	const filters = useAppSelector(state => state.filters.filters);
+	const [heroFormState, setHeroFormState] = useState<IForm>({
+		name: "",
+		description: "",
+		element: "all"
+	});
 
-	const [heroName, setHeroName] = useState<string>("");
-	const [heroDescr, setHeroDescr] = useState("");
-	const [heroElement, setHeroElement] = useState("");
+	const changeForm = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+		setHeroFormState({ ...heroFormState, [e.target.name]: e.target.value });
+	};
 
+
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const [createHero, { isLoading }] = useCreateHeroMutation();
 	const onSubmitHandler = (e: FormEvent) => {
 		e.preventDefault();
+		createHero(heroFormState).unwrap();
+		setHeroFormState({
+			name: "",
+			description: "",
+			element: "all"
+		});
 	};
+
+	console.log(heroFormState);
 	return (
 		<form className="border p-4 shadow-lg rounded" onSubmit={onSubmitHandler}>
 			<div className="mb-3">
@@ -20,21 +41,21 @@ const HeroesAddForm = () => {
 					className="form-control"
 					id="name"
 					placeholder="Как меня зовут?"
-					value={heroName}
-					onChange={(e) => setHeroName(e.target.value)} />
+					value={heroFormState.name}
+					onChange={changeForm} />
 			</div>
 
 			<div className="mb-3">
 				<label htmlFor="text" className="form-label fs-4">Описание</label>
 				<textarea
 					required
-					name="text"
+					name="description"
 					className="form-control"
 					id="text"
 					placeholder="Что я умею?"
 					style={{ "height": "130px" }}
-					value={heroDescr}
-					onChange={(e) => setHeroDescr(e.target.value)} />
+					value={heroFormState.description}
+					onChange={changeForm} />
 			</div>
 
 			<div className="mb-3">
@@ -44,10 +65,14 @@ const HeroesAddForm = () => {
 					className="form-select"
 					id="element"
 					name="element"
-					value={heroElement}
-					onChange={(e) => setHeroElement(e.target.value)}>
+					value={heroFormState.element}
+					onChange={changeForm}>
 					<option value="">Я владею элементом...</option>
-					{/* {renderFilters(filters, filtersLoadingStatus)} */}
+					{filters.map(item => (
+						<option key={item.id} value={item.name}>
+							{item.label}
+						</option>
+					))}
 				</select>
 			</div>
 

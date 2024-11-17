@@ -1,14 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
 import heroes from "./slices/heroesSlice";
 import filters from "./slices/filtersSlice";
+import {apiSlice} from "../api/apiSlice";
 
 
 
 export const store = configureStore({
 	reducer: {
 		heroes,
-		filters
+		filters,
+		[apiSlice.reducerPath] : apiSlice.reducer
 	},
+	middleware : getDefultMiddleware => getDefultMiddleware().concat(apiSlice.middleware),
 	// eslint-disable-next-line no-undef
 	devTools : process.env.NODE_ENV !== "production" 
 });

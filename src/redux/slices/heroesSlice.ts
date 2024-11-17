@@ -2,7 +2,7 @@ import {createSlice , createAsyncThunk} from "@reduxjs/toolkit";
 import {THeroesRoot} from "../../types/heroes";
 import { ROUTES, TStatusType } from "@/types/general.types";
 // import {useHttp} from "../../hooks";
-import { API } from "@/api";
+import { API } from "@/constants";
 
 interface IHeroesInitialState {
     heroes : THeroesRoot

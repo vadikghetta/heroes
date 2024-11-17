@@ -1,4 +1,4 @@
-import { API } from "@/api";
+import { API } from "@/constants";
 import { TFilterRoot, TTypeFilter } from "@/types/filters";
 import { ROUTES, TStatusType } from "@/types/general.types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
