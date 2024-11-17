@@ -2,22 +2,17 @@
 import { useMemo } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import styles from "./styles.module.scss";
-
-
 import HeroesListItem from "../heroes-list-item";
 import Spinner from "../spinner";
-
 import { useAppSelector } from "@/redux/hooks";
 import { THeroesRoot } from "@/types/heroes";
-
-
-import { useGetHeroesQuery } from "../../api/apiSlice";
+import { useGetHeroesQuery, useDeleteHeroMutation } from "../../api/apiSlice";
 
 const HeroesList = () => {
 
 	const { data = [], isLoading, isError } = useGetHeroesQuery("heroes");
 	const activeFilter = useAppSelector(state => state.filters.activeFilter);
-
+	const [deleteHero] = useDeleteHeroMutation();
 	const filteredHeroes = useMemo(() => {
 		const filteredArr = data.slice();
 		if (activeFilter === "all") {
@@ -29,7 +24,7 @@ const HeroesList = () => {
 	}, [activeFilter, data]);
 
 	const onDelete = (id: string) => {
-		console.log(id);
+		deleteHero(id);
 	};
 	if (isLoading) {
 		return <Spinner />;

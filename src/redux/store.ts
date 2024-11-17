@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import heroes from "./slices/heroesSlice";
 import filters from "./slices/filtersSlice";
 import {apiSlice} from "../api/apiSlice";
 
@@ -7,7 +6,6 @@ import {apiSlice} from "../api/apiSlice";
 
 export const store = configureStore({
 	reducer: {
-		heroes,
 		filters,
 		[apiSlice.reducerPath] : apiSlice.reducer
 	},

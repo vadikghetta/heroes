@@ -20,9 +20,16 @@ export const apiSlice = createApi({
 				body : hero
 			}),
 			invalidatesTags : ["Heroes"]
+		}),
+		deleteHero : builder.mutation<IForm, string>({
+			query : id => ({
+				url : `${ROUTES.HEROES}/${id}`,
+				method : "DELETE"
+			}),
+			invalidatesTags : ["Heroes"]
 		})
 	})
 });
 
 
-export const {useGetHeroesQuery , useCreateHeroMutation} = apiSlice;
+export const {useGetHeroesQuery , useCreateHeroMutation , useDeleteHeroMutation} = apiSlice;
