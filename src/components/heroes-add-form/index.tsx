@@ -29,12 +29,12 @@ const HeroesAddForm = () => {
 		});
 	};
 
-	console.log(heroFormState);
 	return (
 		<form className="border p-4 shadow-lg rounded" onSubmit={onSubmitHandler}>
 			<div className="mb-3">
 				<label htmlFor="name" className="form-label fs-4">Имя нового героя</label>
 				<input
+					readOnly={isLoading}
 					required
 					type="text"
 					name="name"
@@ -52,6 +52,7 @@ const HeroesAddForm = () => {
 					name="description"
 					className="form-control"
 					id="text"
+					readOnly={isLoading}
 					placeholder="Что я умею?"
 					style={{ "height": "130px" }}
 					value={heroFormState.description}
@@ -76,7 +77,7 @@ const HeroesAddForm = () => {
 				</select>
 			</div>
 
-			<button type="submit" className="btn btn-primary">Создать</button>
+			<button type="submit" disabled={isLoading} className="btn btn-primary">Создать</button>
 		</form>
 	);
 };

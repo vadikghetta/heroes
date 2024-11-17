@@ -1,7 +1,5 @@
 
 import { useMemo } from "react";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
-import styles from "./styles.module.scss";
 import HeroesListItem from "../heroes-list-item";
 import Spinner from "../spinner";
 import { useAppSelector } from "@/redux/hooks";
@@ -10,7 +8,7 @@ import { useGetHeroesQuery, useDeleteHeroMutation } from "../../api/apiSlice";
 
 const HeroesList = () => {
 
-	const { data = [], isLoading, isError } = useGetHeroesQuery("heroes");
+	const { data = [], isLoading, isError } = useGetHeroesQuery();
 	const activeFilter = useAppSelector(state => state.filters.activeFilter);
 	const [deleteHero] = useDeleteHeroMutation();
 	const filteredHeroes = useMemo(() => {
@@ -35,23 +33,28 @@ const HeroesList = () => {
 	const renderHeroesList = (arr: THeroesRoot) => {
 		if (arr.length === 0) {
 			return (
-				<CSSTransition timeout={0} classNames={styles.hero}>
+				<li >
 					<h5 className="text-center mt-5">Героев пока нет</h5>
-				</CSSTransition>
+				</li>
 			);
 		}
 
 		return arr.map(({ id, name, description, element }) => {
 			return (
-				<CSSTransition key={id} timeout={500} classNames={styles.hero}>
-					<HeroesListItem name={name} description={description} element={element} onDelete={() => onDelete(id)} />
-				</CSSTransition>
+				<li key={id} className={"hero"}>
+					<HeroesListItem
+						name={name}
+						description={description}
+						element={element}
+						onDelete={() => onDelete(id)}
+					/>
+				</li>
 			);
 		});
 	};
 
 	const elements = renderHeroesList(filteredHeroes);
-	return <TransitionGroup component="ul">{elements}</TransitionGroup>;
+	return <ul >{elements}</ul>;
 };
 
 export default HeroesList;

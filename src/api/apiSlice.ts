@@ -1,7 +1,7 @@
 import { API } from "@/constants";
 import { IForm, ROUTES } from "@/types/general.types";
 import {  THeroesRoot } from "@/types/heroes";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery  } from "@reduxjs/toolkit/query/react";
 
 
 export const apiSlice = createApi({
@@ -9,7 +9,7 @@ export const apiSlice = createApi({
 	baseQuery : fetchBaseQuery({baseUrl : API}),
 	tagTypes : ["Heroes"],
 	endpoints : (builder) => ({
-		getHeroes : builder.query<THeroesRoot , string>({
+		getHeroes : builder.query<THeroesRoot , void>({
 			query : () => ROUTES.HEROES,
 			providesTags : ["Heroes"]
 		}),
