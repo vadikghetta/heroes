@@ -12,7 +12,7 @@ export default (env : IEnvVarsType) =>
 		publicFolder : path.resolve(__dirname, "public")
 	};
 	const config : webpack.Configuration = buildWebpack({
-		port : env.port ?? 3400,
+		port : env.port ?? 3003,
 		mode : env.mode ?? "development",
 		paths,
 
